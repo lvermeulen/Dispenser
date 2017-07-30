@@ -1,23 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F62005B6-B940-4E5A-B33C-8C35E2EBF958}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		appveyor.yml = appveyor.yml
 		codecov.yml = codecov.yml
-		global.json = global.json
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Dispenser", "src\Dispenser\Dispenser.xproj", "{28534864-2B0F-45BC-BD4E-0906E4A56993}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{DA29DE6B-DBE7-4977-A7C8-3EC09205B2A0}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Dispenser.Tests", "test\Dispenser.Tests\Dispenser.Tests.xproj", "{F47A5102-0E3F-43DF-B492-CB25588E407F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{F41C1DB0-2770-4DB0-9712-9548A4EC6F8A}"
 	ProjectSection(SolutionItems) = preProject
@@ -26,11 +21,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{F41C1DB0
 		build\test.ps1 = build\test.ps1
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Dispenser.Hasher.Sha1", "src\Dispenser.Hasher.Sha1\Dispenser.Hasher.Sha1.xproj", "{0EF67C01-2767-4716-B367-D1ABFDF5D037}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dispenser", "src\Dispenser\Dispenser.csproj", "{28534864-2B0F-45BC-BD4E-0906E4A56993}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Dispenser.Hasher.Sha256", "src\Dispenser.Hasher.Sha256\Dispenser.Hasher.Sha256.xproj", "{DCEA33C8-3080-4E5E-A7CF-10E88CD91312}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dispenser.Tests", "test\Dispenser.Tests\Dispenser.Tests.csproj", "{F47A5102-0E3F-43DF-B492-CB25588E407F}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Dispenser.Hasher.Tests", "test\Dispenser.Hasher.Tests\Dispenser.Hasher.Tests.xproj", "{DD73482E-699E-44CA-93E1-5D9CE27474B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dispenser.Hasher.Sha1", "src\Dispenser.Hasher.Sha1\Dispenser.Hasher.Sha1.csproj", "{0EF67C01-2767-4716-B367-D1ABFDF5D037}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dispenser.Hasher.Sha256", "src\Dispenser.Hasher.Sha256\Dispenser.Hasher.Sha256.csproj", "{DCEA33C8-3080-4E5E-A7CF-10E88CD91312}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dispenser.Hasher.Tests", "test\Dispenser.Hasher.Tests\Dispenser.Hasher.Tests.csproj", "{DD73482E-699E-44CA-93E1-5D9CE27474B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

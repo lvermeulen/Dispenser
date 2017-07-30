@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Dispenser</Description>
+    <Copyright>Copyright 2017</Copyright>
+    <AssemblyTitle>Dispenser</AssemblyTitle>
+    <Authors>Luk Vermeulen</Authors>
+    <TargetFrameworks>net452;netstandard1.4</TargetFrameworks>
+    <AssemblyName>Dispenser</AssemblyName>
+    <PackageId>Dispenser</PackageId>
+    <PackageTags>hash;changes</PackageTags>
+    <PackageIconUrl>http://i.imgur.com/w43BUH9.png?1</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/lvermeulen/Dispenser</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/lvermeulen/Dispenser/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/lvermeulen/Dispenser</RepositoryUrl>
+    <NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.4' ">1.6.1</NetStandardImplicitPackageVersion>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.4' ">
+    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>

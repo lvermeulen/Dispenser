@@ -8,6 +8,7 @@ environment:
   COVERALLS_REPO_TOKEN:
     secure: K5J/3pUKGrNQVjIywrUCWMWilnoNb1jlNFgfyOx6TJm87jLq3ryaSaZB0UpUvaSp
   COVER_FILTER: '+[Dispenser*]* -[*Tests]*'
+image: Visual Studio 2019
 build_script:
 - ps: .\build\build.ps1 $env:APPVEYOR_BUILD_VERSION $env:APPVEYOR_REPO_TAG_NAME
 #before_test:
@@ -19,7 +20,7 @@ test_script:
         .\build\test.ps1
     }
 artifacts:
-- path: '**\*.nupkg'
+- path: '.\artifacts\*.nupkg'
 deploy:
 - provider: NuGet
   api_key:

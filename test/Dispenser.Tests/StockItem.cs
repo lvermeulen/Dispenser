@@ -5,7 +5,7 @@ namespace Dispenser.Tests
     public class StockItem
     {
         public string Sku { get; }
-        public int Quantity { get; set; }
+        public int Quantity { get; }
 
         public StockItem(string sku)
         {

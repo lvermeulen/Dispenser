@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Dispenser.Hasher.Sha1;
 using Xunit;
 
@@ -51,6 +52,27 @@ namespace Dispenser.Tests
             Assert.Contains(new StockItem("Lumber 2x4", 3), results.Updates);
 
             Assert.Contains(new StockItem("Lumber 2x10", 2), results.Deletes);
+        }
+
+        [Fact]
+        public void ExcludePropertyNames()
+        {
+            const string EXCLUDED_PROPERTY_NAME = "Description";
+
+            var hasher = new Sha1Hasher();
+            var previousStock = _previousStock.Select(x => new StockItemWithDescription(x.Sku, x.Quantity, x.Sku)).Hash(hasher, new [] { EXCLUDED_PROPERTY_NAME });
+            var actualStock = _actualStock.Select(x => new StockItemWithDescription(x.Sku, x.Quantity, x.Sku)).Hash(hasher, new [] { EXCLUDED_PROPERTY_NAME });
+            var results = new Dispenser<StockItemWithDescription, string>().Dispense(actualStock, previousStock, x => x.Sku);
+
+            Assert.NotNull(results);
+            Assert.True(results.HasChanges);
+            Assert.Contains(new StockItemWithDescription("Lumber 2x3", 6), results.Inserts);
+            Assert.Contains(new StockItemWithDescription("Lumber 2x6", 3), results.Inserts);
+
+            Assert.Contains(new StockItemWithDescription("Lumber 2x2", 3), results.Updates);
+            Assert.Contains(new StockItemWithDescription("Lumber 2x4", 3), results.Updates);
+
+            Assert.Contains(new StockItemWithDescription("Lumber 2x10", 2), results.Deletes);
         }
     }
 }

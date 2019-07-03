@@ -1,13 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29025.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F62005B6-B940-4E5A-B33C-8C35E2EBF958}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		appveyor.yml = appveyor.yml
 		codecov.yml = codecov.yml
+		global.json = global.json
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
@@ -62,5 +63,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F47A5102-0E3F-43DF-B492-CB25588E407F} = {DA29DE6B-DBE7-4977-A7C8-3EC09205B2A0}
 		{DD73482E-699E-44CA-93E1-5D9CE27474B3} = {DA29DE6B-DBE7-4977-A7C8-3EC09205B2A0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {23448DAD-07A6-456E-A582-6AC43DC02333}
 	EndGlobalSection
 EndGlobal

@@ -29,7 +29,6 @@ namespace Dispenser.Tests
             return Equals(Value, other.Value);
         }
 
-        public override int GetHashCode() => 
-            EqualityComparer<T>.Default.GetHashCode(Value);
+        public override int GetHashCode() => EqualityComparer<T>.Default.GetHashCode(Value);
     }
 }

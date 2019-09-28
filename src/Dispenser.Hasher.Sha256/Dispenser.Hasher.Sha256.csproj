@@ -5,7 +5,7 @@
     <Copyright>Copyright 2017</Copyright>
     <AssemblyTitle>Dispenser.Hasher.Sha56</AssemblyTitle>
     <Authors>Luk Vermeulen</Authors>
-    <TargetFrameworks>net452;netstandard1.4</TargetFrameworks>
+    <TargetFrameworks>net452;netstandard1.4;netstandard2.0;net461;net472</TargetFrameworks>
     <AssemblyName>Dispenser.Hasher.Sha256</AssemblyName>
     <PackageId>Dispenser.Hasher.Sha256</PackageId>
     <PackageTags>hash;changes;hasher;sha26</PackageTags>

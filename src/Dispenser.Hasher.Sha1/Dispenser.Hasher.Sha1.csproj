@@ -5,7 +5,7 @@
     <Copyright>Copyright 2017</Copyright>
     <AssemblyTitle>Dispenser.Hasher.Sha1</AssemblyTitle>
     <Authors>Luk Vermeulen</Authors>
-    <TargetFrameworks>net452;netstandard1.4</TargetFrameworks>
+    <TargetFrameworks>net452;netstandard1.4;netstandard2.0;net461;net472</TargetFrameworks>
     <AssemblyName>Dispenser.Hasher.Sha1</AssemblyName>
     <PackageId>Dispenser.Hasher.Sha1</PackageId>
     <PackageTags>hash;changes;hasher;sha1</PackageTags>

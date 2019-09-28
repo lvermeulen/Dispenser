@@ -8,7 +8,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		appveyor.yml = appveyor.yml
 		codecov.yml = codecov.yml
-		global.json = global.json
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
@@ -31,6 +30,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dispenser.Hasher.Sha256", "src\Dispenser.Hasher.Sha256\Dispenser.Hasher.Sha256.csproj", "{DCEA33C8-3080-4E5E-A7CF-10E88CD91312}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dispenser.Hasher.Tests", "test\Dispenser.Hasher.Tests\Dispenser.Hasher.Tests.csproj", "{DD73482E-699E-44CA-93E1-5D9CE27474B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{B55F7037-093E-4A99-B8A8-A4316EED0765}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DispenserChannelsTest", "samples\DispenserChannelsTest\DispenserChannelsTest.csproj", "{E6757994-218E-4556-BEAA-1FDB5BDB9793}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +59,9 @@ Global
 		{DD73482E-699E-44CA-93E1-5D9CE27474B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DD73482E-699E-44CA-93E1-5D9CE27474B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD73482E-699E-44CA-93E1-5D9CE27474B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6757994-218E-4556-BEAA-1FDB5BDB9793}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6757994-218E-4556-BEAA-1FDB5BDB9793}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6757994-218E-4556-BEAA-1FDB5BDB9793}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +69,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F47A5102-0E3F-43DF-B492-CB25588E407F} = {DA29DE6B-DBE7-4977-A7C8-3EC09205B2A0}
 		{DD73482E-699E-44CA-93E1-5D9CE27474B3} = {DA29DE6B-DBE7-4977-A7C8-3EC09205B2A0}
+		{E6757994-218E-4556-BEAA-1FDB5BDB9793} = {B55F7037-093E-4A99-B8A8-A4316EED0765}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23448DAD-07A6-456E-A582-6AC43DC02333}

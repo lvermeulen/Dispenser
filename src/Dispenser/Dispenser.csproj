@@ -5,7 +5,7 @@
     <Copyright>Copyright 2017</Copyright>
     <AssemblyTitle>Dispenser</AssemblyTitle>
     <Authors>Luk Vermeulen</Authors>
-    <TargetFrameworks>net452;netstandard1.4</TargetFrameworks>
+    <TargetFrameworks>net452;netstandard1.4;netstandard2.0;net461;net472</TargetFrameworks>
     <AssemblyName>Dispenser</AssemblyName>
     <PackageId>Dispenser</PackageId>
     <PackageTags>hash;changes</PackageTags>
@@ -15,7 +15,6 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/lvermeulen/Dispenser</RepositoryUrl>
-    <NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.4' ">1.6.1</NetStandardImplicitPackageVersion>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>

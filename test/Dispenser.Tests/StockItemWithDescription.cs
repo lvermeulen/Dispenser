@@ -2,7 +2,7 @@
 {
     public class StockItemWithDescription : StockItem
     {
-        public string Description { get; set; }
+        public string Description { get; }
 
         protected StockItemWithDescription(string sku) 
             : base(sku)

@@ -3,7 +3,7 @@ param (
 	[string]$TagVersionNumber
 )
 
-& msbuild /t:restore /p:Configuration=Release Dispenser.sln
+& msbuild -t:restore /p:Configuration=Release Dispenser.sln
 
 foreach ($src in ls $PSScriptRoot\..\src/*) {
     Push-Location $src
@@ -17,8 +17,8 @@ foreach ($src in ls $PSScriptRoot\..\src/*) {
         $version = $BuildVersionNumber
     }
 
-    & msbuild /t:restore /p:Configuration=Release
-    & dotnet pack -c Release --include-symbols -o ..\..\artifacts --no-build /p:PackageVersion=$version
+    & msbuild /p:Configuration=Release
+    & msbuild -t:pack $src.csproj /p:Configuration=Release -p:IncludeSymbols=true -p:BuildOutputTargetFolder=..\..\artifacts /p:PackageVersion=$version
     if($LASTEXITCODE -ne 0) { exit 1 }    
 
     Pop-Location

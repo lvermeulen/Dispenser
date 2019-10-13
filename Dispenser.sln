@@ -8,6 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		appveyor.yml = appveyor.yml
 		codecov.yml = codecov.yml
+		global.json = global.json
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
@@ -33,7 +34,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dispenser.Hasher.Tests", "t
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{B55F7037-093E-4A99-B8A8-A4316EED0765}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DispenserChannelsTest", "samples\DispenserChannelsTest\DispenserChannelsTest.csproj", "{E6757994-218E-4556-BEAA-1FDB5BDB9793}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DispenserChannelsTest", "samples\DispenserChannelsTest\DispenserChannelsTest.csproj", "{E6757994-218E-4556-BEAA-1FDB5BDB9793}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

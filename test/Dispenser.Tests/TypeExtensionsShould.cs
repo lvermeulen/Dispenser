@@ -14,7 +14,7 @@ namespace Dispenser.Tests
         public void GetSimpleTypeNames(Type type)
         {
             string result = type.GetAllTypeNames();
-            Assert.Equal(type.Name, result);
+            Assert.Equal(type?.Name, result);
         }
 
         [Theory]

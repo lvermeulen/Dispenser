@@ -3,6 +3,7 @@ param (
 	[string]$TagVersionNumber
 )
 
+& dotnet --info
 & dotnet restore --no-cache
 
 foreach ($src in ls $PSScriptRoot\..\src/*) {

@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# SCS0006: Weak hashing function
+dotnet_diagnostic.SCS0006.severity = none

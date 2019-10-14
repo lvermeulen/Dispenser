@@ -32,6 +32,6 @@ steps:
   inputs:
     command: push
     nuGetFeedType: external
-    publishFeedCredentials: 'https://api.nuget.org/v3/index.json'
+    publishFeedCredentials: 'https://api.nuget.org/v3/'
     versioningScheme: byEnvVar
     versionEnvVar: version

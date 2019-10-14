@@ -15,10 +15,10 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: Restore
   inputs:
-    command: restore
+    command: 'restore'
     projects: '**/*.csproj'
     feedsToUse: 'select'
-    includeNuGetOrg: true
+    verbosityRestore: 'Quiet'
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
@@ -41,6 +41,7 @@ steps:
     includesymbols: true
     versioningScheme: 'byEnvVar'
     versionEnvVar: 'version'
+    verbosityPack: 'Quiet'
 - task: NuGetCommand@2
   displayName: Push
   inputs:
@@ -48,3 +49,4 @@ steps:
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'NuGet'
+    verbosityPush: 'Quiet'

@@ -24,10 +24,27 @@ steps:
   inputs:
     command: build
     projects: '**/*.csproj'
-    arguments: '--configuration Release' # Update this to match your need
+    arguments: '--configuration Release'
 - task: DotNetCoreCLI@2
+  displayName: Test
   inputs:
     command: test
-    projects: '**/*Tests/*.csproj'
+    projects: 'test/**/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
-- script: dotnet pack /p:PackageVersion=$(version)  # define version variable elsewhere in your pipeline
+- task: DotNetCoreCLI@2
+  displayName: Pack
+  inputs:
+    command: 'pack'
+    packagesToPack: 'src/**/*.csproj'
+    configuration: 'Release'
+    nobuild: true
+    includesymbols: true
+    versioningScheme: 'byEnvVar'
+    versionEnvVar: 'version'
+- task: DotNetCoreCLI@2
+  displayName: Push
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: 'NuGet'

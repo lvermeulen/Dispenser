@@ -1,6 +1,10 @@
 trigger:
-- tags
-    include: *
+  branches:
+    include:
+    - master
+  tags:
+    include:
+    - ?*
 
 pool:
   vmImage: 'windows-2019'

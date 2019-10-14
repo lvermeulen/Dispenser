@@ -36,6 +36,7 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: 'src/**/*.csproj'
+    configuration: 'Release'
     nobuild: true
     includesymbols: true
     versioningScheme: 'byEnvVar'

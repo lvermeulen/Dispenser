@@ -1,5 +1,6 @@
 trigger:
-- master
+- tags
+    include: *
 
 pool:
   vmImage: 'windows-2019'

@@ -1,8 +1,3 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
 - master
 
@@ -14,6 +9,9 @@ steps:
   displayName: 'Install .NET Core SDK'
   inputs:
     version: 3.0.100
+- task: NuGetToolInstaller@1
+  inputs:
+    versionSpec: 4.0
 - script: dotnet restore --no-cache
   displayName: 'Restore dependencies'
 - task: DotNetCoreCLI@2

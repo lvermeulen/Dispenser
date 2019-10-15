@@ -3,33 +3,14 @@ trigger:
     include:
     - master
 
-pool:
-  vmImage: 'windows-2019'
-
-steps:
-- task: UseDotNet@2
-  displayName: 'Install .NET Core SDK'
-  inputs:
-    version: 3.0.100
-- task: NuGetToolInstaller@1
-  inputs:
-    versionSpec: 5.3.0
-- task: DotNetCoreCLI@2
-  displayName: Restore
-  inputs:
-    command: 'restore'
-    projects: '**/*.csproj'
-    feedsToUse: 'select'
-    verbosityRestore: 'Quiet'
-- task: DotNetCoreCLI@2
-  displayName: Build
-  inputs:
-    command: build
-    projects: '**/*.csproj'
-    arguments: '--configuration Release'
-- task: DotNetCoreCLI@2
-  displayName: Test
-  inputs:
-    command: test
-    projects: 'test/**/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'
+jobs:
+- job: Build
+  displayName: Build Dispenser
+  pool:
+    vmImage: 'windows-2019'
+  steps:
+  - template: templates/dotnetcore/restore_build_test.yml@templates
+    parameters:
+        projects: '**/*.csproj'
+        testProjects: 'test/**/*.csproj'
+        buildConfiguration: 'Release'

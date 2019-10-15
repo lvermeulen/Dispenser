@@ -3,52 +3,21 @@ trigger:
     include:
     - ?*
 
-pool:
-  vmImage: 'windows-2019'
 
-steps:
-- task: UseDotNet@2
-  displayName: 'Install .NET Core SDK'
-  inputs:
-    version: 3.0.100
-- task: NuGetToolInstaller@1
-  inputs:
-    versionSpec: 5.3.0
-- task: DotNetCoreCLI@2
-  displayName: Restore
-  inputs:
-    command: 'restore'
-    projects: '**/*.csproj'
-    feedsToUse: 'select'
-    verbosityRestore: 'Quiet'
-- task: DotNetCoreCLI@2
-  displayName: Build
-  inputs:
-    command: build
-    projects: '**/*.csproj'
-    arguments: '--configuration Release'
-- task: DotNetCoreCLI@2
-  displayName: Test
-  inputs:
-    command: test
-    projects: 'test/**/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'
-- task: DotNetCoreCLI@2
-  displayName: Pack
-  inputs:
-    command: 'pack'
-    packagesToPack: 'src/**/*.csproj'
-    configuration: 'Release'
-    nobuild: true
-    includesymbols: true
-    versioningScheme: 'byEnvVar'
-    versionEnvVar: 'version'
-    verbosityPack: 'Quiet'
-- task: NuGetCommand@2
-  displayName: Push
-  inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-    nuGetFeedType: 'external'
-    publishFeedCredentials: 'NuGet'
-    verbosityPush: 'Quiet'
+jobs:
+- job: BuildPublish
+  displayName: Build and Publish Dispenser
+  pool:
+    vmImage: 'windows-2019'
+  steps:
+  - template: templates/dotnetcore/restore_build_test.yml
+    parameters:
+      projects: '**/*.csproj'
+      testProjects: 'test/**/*.csproj'
+      buildConfiguration: 'Release'
+  - template: templates/dotnetcore/pack_push.yml
+    parameters: 
+      projectsToPack: 'src/**/*.csproj'
+      buildConfiguration: 'Release'
+      nupkgFolder: '$(Build.ArtifactStagingDirectory)'
+      nugetServiceConnectionName: 'NuGet'

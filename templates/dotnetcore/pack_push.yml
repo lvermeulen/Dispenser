@@ -1,0 +1,26 @@
+parameters:
+  projectsToPack: 'src/**/*.csproj'
+  buildConfiguration: 'Release'
+  nupkgFolder: '$(Build.ArtifactStagingDirectory)'
+  nugetServiceConnectionName: 'NuGet'
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: Pack
+  inputs:
+    command: 'pack'
+    packagesToPack: ${{ parameters.projectsToPack }}
+    configuration: ${{ parameters.buildConfiguration }}
+    nobuild: true
+    includesymbols: true
+    versioningScheme: 'byEnvVar'
+    versionEnvVar: 'version'
+    verbosityPack: 'Quiet'
+- task: NuGetCommand@2
+  displayName: Push
+  inputs:
+    command: 'push'
+    packagesToPush: '${{ parameters.nupkgFolder }}/**/*.nupkg;!${{ parameters.nupkgFolder }}/**/*.symbols.nupkg'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: ${{ parameters.nugetServiceConnectionName }}
+    verbosityPush: 'Quiet'

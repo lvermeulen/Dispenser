@@ -13,4 +13,4 @@ jobs:
     parameters:
         projects: '**/*.csproj'
         testProjects: 'test/**/*.csproj'
-        buildConfiguration: 'Release'
+        buildConfiguration: 'Debug'

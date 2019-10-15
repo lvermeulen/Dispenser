@@ -9,7 +9,7 @@ jobs:
   pool:
     vmImage: 'windows-2019'
   steps:
-  - template: templates/dotnetcore/restore_build_test.yml@templates
+  - template: templates/dotnetcore/restore_build_test.yml
     parameters:
         projects: '**/*.csproj'
         testProjects: 'test/**/*.csproj'

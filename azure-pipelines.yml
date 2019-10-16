@@ -37,7 +37,12 @@ stages:
     pool:
       vmImage: 'windows-2019'
     steps:
-    
+    - task: DownloadBuildArtifacts@0
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        downloadPath: '$(System.ArtifactsDirectory)'
+        artifactName: 'drop'
     - template: templates/dotnetcore/pack_push.yml@templates
       parameters: 
         projectsToPack: 'src/**/*.csproj'

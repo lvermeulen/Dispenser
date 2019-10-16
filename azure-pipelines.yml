@@ -11,14 +11,36 @@ resources:
       ref: refs/tags/1.0.0
       endpoint: lvermeulen
 
-jobs:
-- job: Build
-  displayName: Build Dispenser
-  pool:
-    vmImage: 'windows-2019'
-  steps:
-  - template: templates/dotnetcore/restore_build_test.yml@templates
-    parameters:
-        projects: '**/*.csproj'
-        testProjects: 'test/**/*.csproj'
-        buildConfiguration: 'Debug'
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: 'windows-2019'
+    steps:
+    - template: templates/dotnetcore/restore_build_test.yml@templates
+      parameters:
+          projects: '**/*.csproj'
+          testProjects: 'test/**/*.csproj'
+          buildConfiguration: 'Release'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+
+- stage: Publish
+  jobs:
+  - job: Publish
+    displayName: Publish
+    pool:
+      vmImage: 'windows-2019'
+    steps:
+    
+    - template: templates/dotnetcore/pack_push.yml@templates
+      parameters: 
+        projectsToPack: 'src/**/*.csproj'
+        buildConfiguration: 'Release'
+        nupkgFolder: '$(Build.ArtifactStagingDirectory)'
+        nugetServiceConnectionName: 'NuGet'

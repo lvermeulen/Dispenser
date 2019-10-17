@@ -8,7 +8,7 @@ resources:
     - repository: templates
       type: github
       name: lvermeulen/Templates
-      ref: refs/tags/1.1.0
+      ref: refs/tags/1.0.0
       endpoint: lvermeulen
 
 stages:
@@ -24,9 +24,13 @@ stages:
           projects: '**/*.csproj'
           testProjects: 'test/**/*.csproj'
           buildConfiguration: 'Release'
-          stagingDirectory: '$(Build.ArtifactStagingDirectory)'
-          artifactName: 'drop'
-          publishLocation: 'Container'
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(Build.BinariesDirectory)'
+        Contents: '**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+        CleanTargetFolder: true
+        OverWrite: true
 
 - stage: Publish
   jobs:

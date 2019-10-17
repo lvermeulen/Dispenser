@@ -19,16 +19,42 @@ stages:
     pool:
       vmImage: 'windows-2019'
     steps:
-    - template: templates/dotnetcore/restore_build_test.yml@templates
-      parameters:
-          projects: '**/*.csproj'
-          testProjects: 'test/**/*.csproj'
-          buildConfiguration: 'Release'
+    #- template: templates/dotnetcore/restore_build_test.yml@templates
+    #  parameters:
+    #      projects: '**/*.csproj'
+    #      testProjects: 'test/**/*.csproj'
+    #      buildConfiguration: 'Release'
+    - task: UseDotNet@2
+      displayName: 'Install .NET Core SDK'
+      inputs:
+        version: 3.0.100
+    - task: NuGetToolInstaller@1
+      inputs:
+        versionSpec: 5.3.0
+    - task: DotNetCoreCLI@2
+      displayName: Restore
+      inputs:
+        command: 'restore'
+        projects: ${{ parameters.projects }}
+        feedsToUse: 'select'
+        verbosityRestore: 'Quiet'
+    - task: DotNetCoreCLI@2
+      displayName: Build
+      inputs:
+        command: build
+        projects: ${{ parameters.projects }}
+        arguments: '--configuration Release --output ./output'
+    - task: DotNetCoreCLI@2
+      displayName: Test
+      inputs:
+        command: test
+        projects: ${{ parameters.testProjects }}
+        arguments: '--configuration Release'
     - task: CopyFiles@2
       displayName: 'Copy Files'
       inputs:
-        SourceFolder: '$(Build.BinariesDirectory)'
-        Contents: '**/bin/**'
+        SourceFolder: './output'
+        Contents: '**'
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
         CleanTargetFolder: true
         OverWrite: true

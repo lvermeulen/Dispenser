@@ -25,9 +25,10 @@ stages:
           testProjects: 'test/**/*.csproj'
           buildConfiguration: 'Release'
     - task: CopyFiles@2
+      displayName: 'Copy Files'
       inputs:
         SourceFolder: '$(Build.BinariesDirectory)'
-        Contents: '**'
+        Contents: '**/bin/**'
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
         CleanTargetFolder: true
         OverWrite: true

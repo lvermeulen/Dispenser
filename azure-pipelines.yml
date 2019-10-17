@@ -50,7 +50,7 @@ stages:
       inputs:
         SourceFolder: './output'
         Contents: '**'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+        TargetFolder: '$(System.ArtifactsDirectory)'
         CleanTargetFolder: true
         OverWrite: true
 
@@ -67,9 +67,11 @@ stages:
         downloadType: 'single'
         downloadPath: '$(System.ArtifactsDirectory)'
         artifactName: 'drop'
-    - template: templates/dotnetcore/pack_push.yml@templates
-      parameters: 
-        projectsToPack: 'src/**/*.csproj'
-        buildConfiguration: 'Release'
-        nupkgFolder: '$(Build.ArtifactStagingDirectory)'
-        nugetServiceConnectionName: 'NuGet'
+    - task: NuGetCommand@2
+      displayName: Push
+      inputs:
+        command: 'push'
+        packagesToPush: '$(System.ArtifactsDirectory)/**/*.nupkg;!$(System.ArtifactsDirectory)/**/*.symbols.nupkg'
+        nuGetFeedType: 'external'
+        publishFeedCredentials: 'NuGet'
+        verbosityPush: 'Quiet'

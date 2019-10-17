@@ -66,12 +66,6 @@ stages:
     pool:
       vmImage: 'windows-2019'
     steps:
-    - task: DownloadBuildArtifacts@0
-      inputs:
-        buildType: 'current'
-        downloadType: 'single'
-        downloadPath: '$(System.ArtifactsDirectory)'
-        artifactName: 'drop'
     - task: NuGetCommand@2
       displayName: Push
       inputs:

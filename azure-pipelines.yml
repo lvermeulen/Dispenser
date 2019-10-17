@@ -19,11 +19,6 @@ stages:
     pool:
       vmImage: 'windows-2019'
     steps:
-    #- template: templates/dotnetcore/restore_build_test.yml@templates
-    #  parameters:
-    #      projects: '**/*.csproj'
-    #      testProjects: 'test/**/*.csproj'
-    #      buildConfiguration: 'Release'
     - task: UseDotNet@2
       displayName: 'Install .NET Core SDK'
       inputs:
@@ -35,20 +30,20 @@ stages:
       displayName: Restore
       inputs:
         command: 'restore'
-        projects: ${{ parameters.projects }}
+        projects: '**/*.csproj'
         feedsToUse: 'select'
         verbosityRestore: 'Quiet'
     - task: DotNetCoreCLI@2
       displayName: Build
       inputs:
         command: build
-        projects: ${{ parameters.projects }}
+        projects: '**/*.csproj'
         arguments: '--configuration Release --output ./output'
     - task: DotNetCoreCLI@2
       displayName: Test
       inputs:
         command: test
-        projects: ${{ parameters.testProjects }}
+        projects: 'test/**/*.csproj'
         arguments: '--configuration Release'
     - task: CopyFiles@2
       displayName: 'Copy Files'

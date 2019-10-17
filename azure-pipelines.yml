@@ -33,6 +33,11 @@ stages:
         projects: '**/*.csproj'
         feedsToUse: 'select'
         verbosityRestore: 'Quiet'
+    - task: DeleteFiles@1
+      inputs:
+        SourceFolder: './output'
+        Contents: '**'
+        RemoveSourceFolder: true
     - task: DotNetCoreCLI@2
       displayName: Build
       inputs:

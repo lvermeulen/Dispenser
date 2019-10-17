@@ -11,14 +11,66 @@ resources:
       ref: refs/tags/1.0.0
       endpoint: lvermeulen
 
-jobs:
-- job: Build
-  displayName: Build Dispenser
-  pool:
-    vmImage: 'windows-2019'
-  steps:
-  - template: templates/dotnetcore/restore_build_test.yml@templates
-    parameters:
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: 'windows-2019'
+    steps:
+    - task: UseDotNet@2
+      displayName: 'Install .NET Core SDK'
+      inputs:
+        version: 3.0.100
+    - task: NuGetToolInstaller@1
+      inputs:
+        versionSpec: 5.3.0
+    - task: DotNetCoreCLI@2
+      displayName: Restore
+      inputs:
+        command: 'restore'
         projects: '**/*.csproj'
-        testProjects: 'test/**/*.csproj'
-        buildConfiguration: 'Debug'
+        feedsToUse: 'select'
+        verbosityRestore: 'Quiet'
+    - task: DeleteFiles@1
+      inputs:
+        SourceFolder: './output'
+        Contents: '**'
+        RemoveSourceFolder: true
+    - task: DotNetCoreCLI@2
+      displayName: Build
+      inputs:
+        command: build
+        projects: 'src/**/*.csproj'
+        arguments: '--configuration Release --output ./output'
+    - task: DotNetCoreCLI@2
+      displayName: Test
+      inputs:
+        command: test
+        projects: 'test/**/*.csproj'
+        arguments: '--configuration Release'
+    - task: CopyFiles@2
+      displayName: 'Copy Files'
+      inputs:
+        SourceFolder: './output'
+        Contents: '**/*.nupkg'
+        TargetFolder: '$(System.ArtifactsDirectory)'
+        CleanTargetFolder: true
+        OverWrite: true
+
+- stage: Publish
+  jobs:
+  - job: Publish
+    displayName: Publish
+    pool:
+      vmImage: 'windows-2019'
+    steps:
+    - task: NuGetCommand@2
+      displayName: Push
+      inputs:
+        command: 'push'
+        packagesToPush: '$(System.ArtifactsDirectory)/**/*.nupkg;!$(System.ArtifactsDirectory)/**/*.symbols.nupkg'
+        nuGetFeedType: 'external'
+        publishFeedCredentials: 'NuGet'
+        verbosityPush: 'Quiet'

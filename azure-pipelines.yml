@@ -42,7 +42,7 @@ stages:
       displayName: Build
       inputs:
         command: build
-        projects: '**/*.csproj'
+        projects: 'src/**/*.csproj'
         arguments: '--configuration Release --output ./output'
     - task: DotNetCoreCLI@2
       displayName: Test
@@ -54,7 +54,7 @@ stages:
       displayName: 'Copy Files'
       inputs:
         SourceFolder: './output'
-        Contents: '**'
+        Contents: '**/*.nupkg'
         TargetFolder: '$(System.ArtifactsDirectory)'
         CleanTargetFolder: true
         OverWrite: true

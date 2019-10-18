@@ -34,6 +34,7 @@ stages:
         feedsToUse: 'select'
         verbosityRestore: 'Quiet'
     - task: DeleteFiles@1
+      displayName: 'Delete Output Folder'
       inputs:
         SourceFolder: './output'
         Contents: '**'
@@ -42,7 +43,7 @@ stages:
       displayName: Build
       inputs:
         command: build
-        projects: 'src/**/*.csproj'
+        projects: 'Dispenser.sln'
         arguments: '--configuration Release --output ./output'
     - task: DotNetCoreCLI@2
       displayName: Test

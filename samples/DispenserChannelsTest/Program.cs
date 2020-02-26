@@ -10,7 +10,7 @@ namespace DispenserChannelsTest
 {
     public static class Program
     {
-        private static readonly StockItem[] _previousStock = 
+        private static readonly StockItem[] s_previousStock =
         {
             new StockItem("Lumber 2x2", 7),
             new StockItem("Lumber 2x4", 5),
@@ -18,7 +18,7 @@ namespace DispenserChannelsTest
             new StockItem("Lumber 2x10", 2)
         };
 
-        private static readonly StockItem[] _actualStock =
+        private static readonly StockItem[] s_actualStock =
         {
             new StockItem("Lumber 2x2", 3),
             new StockItem("Lumber 2x3", 6),
@@ -46,7 +46,7 @@ namespace DispenserChannelsTest
             var channel = Channel.CreateBounded<StockItem>(options);
 
             var hasher = new Sha256Hasher();
-            var results = new Dispenser<StockItem, string>().Dispense(_actualStock.Hash(hasher), _previousStock.Hash(hasher), x => x.Sku);
+            var results = new Dispenser<StockItem, string>().Dispense(s_actualStock.Hash(hasher), s_previousStock.Hash(hasher), x => x.Sku);
 
             Console.WriteLine("Insert results:");
             foreach (var result in results.Inserts)
@@ -68,7 +68,7 @@ namespace DispenserChannelsTest
             var insertProducer = new Producer(channel.Writer, "inserts", results.Inserts);
             var updateProducer = new Producer(channel.Writer, "updates", results.Updates);
             var deleteProducer = new Producer(channel.Writer, "deletes", results.Deletes);
-            
+
             var insertConsumer = new Consumer(channel.Reader, "inserts");
             var updateConsumer = new Consumer(channel.Reader, "updates");
             var deleteConsumer = new Consumer(channel.Reader, "deletes");
@@ -85,10 +85,11 @@ namespace DispenserChannelsTest
 
                 await Task
                     .WhenAll(insertProducerTask, updateProducerTask, deleteProducerTask)
-                    .ContinueWith(_ => channel.Writer.Complete(), tokenSource.Token);
+                    .ContinueWith(_ => channel.Writer.Complete(), tokenSource.Token)
+                    .ConfigureAwait(false);
             }
 
-            await Task.WhenAll(insertConsumerTask, updateConsumerTask, deleteConsumerTask);
+            await Task.WhenAll(insertConsumerTask, updateConsumerTask, deleteConsumerTask).ConfigureAwait(false);
 
             Console.WriteLine("Press Enter to exit");
             Console.ReadLine();
